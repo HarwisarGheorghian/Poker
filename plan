@@ -1,0 +1,16 @@
+To Do
+--Make the players -- tokens, money
+--Make the Main game
+    --Step 1: Make starting bet (usually of a small amount using 1 - 5 dollars)
+    --Step 2: Dealer deals 2 cards to each player
+    --Step 3: Each player makes a check, bet, or fold
+        Check means not betting but staying the game
+        Bet means increasing the amount you bet for the game
+        Fold means you withdraw from the game and sacrifice the amount that you bet
+
+    --Step 4: Dealer places 3 careds
+    --Step 5: Each player makes a check, bet, or fold
+    --Step 6: Dealer deals 1 cards
+    --Step 7: Each player makes a check, bet or fold
+    --Step 8: Dealer deals 1 last card 
+    --Step 9: Players call their highest hand. Whoever has the highest hand wins the game and gets the money
