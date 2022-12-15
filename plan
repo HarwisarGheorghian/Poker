@@ -14,3 +14,9 @@ To Do
     --Step 7: Each player makes a check, bet or fold
     --Step 8: Dealer deals 1 last card 
     --Step 9: Players call their highest hand. Whoever has the highest hand wins the game and gets the money
+
+Game Class: Will handle Game Logic
+Player Class: Will handle all players and their attributes
+Main Class: will declare all the information and run the game class
+
+Players will bet with money not with tokens

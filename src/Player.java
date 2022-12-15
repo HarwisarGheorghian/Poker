@@ -14,13 +14,18 @@ enum Tokens{
 public class Player{
 
     private int money;
-    EnumMap<Tokens,Integer> tokensCounter = new EnumMap<Tokens,Integer>(Tokens.class);
+    private EnumMap<Tokens,Integer> tokensCounter = new EnumMap<Tokens,Integer>(Tokens.class);
     public Player(){
         this.money = 200;
+        this.tokensCounter = tokensCounter;
         tokensCounter.put(Tokens.ONE, 10);
         tokensCounter.put(Tokens.FIVE, 8);
         tokensCounter.put(Tokens.TEN, 5);
         tokensCounter.put(Tokens.FIFTY, 2);
+    }
+
+    public EnumMap<Tokens,Integer> getTokenCounter(){
+        return this.tokensCounter;
     }
 
     public int getMoney(){
@@ -29,6 +34,10 @@ public class Player{
 
     public void setMoney(int mon){
         money = mon;
+    }
+
+    public int getKeyValue(Tokens token){
+        return tokensCounter.get(token);
     }
 
     public String toString(){
