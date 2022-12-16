@@ -42,17 +42,21 @@ public class Game{
         return this.getStageDesc;
     }*/
 
+    //makeBet uses a class made (Game made) stage value. Since that value is dependent on the user and not the game,
+    // we need to add a parameter
+
     //Allows player the specify the amount of tokens used. Changes per stage
-    public void makeBet(int index, int amount){ //need to specify the index of the player
+    public void makeBet(int index, int amount, Stages s){ //need to specify the index of the player
         Scanner sc = new Scanner(System.in);
-        if(this.stage == Stages.START){ // You can't use any tokens above 5
+
+        if(this.stage == s.START){ // You can't use any tokens above 5
             while(amount > 5){ // repeat until they choose a value less than 5
                 System.out.println("You cant bet more than 5 dollars during the start phase.");
                 amount = sc.nextInt();
             }
             this.thePlayers[index].getTokenCounter().put(Tokens.ONE, this.thePlayers[index].getKeyValue(Tokens.ONE) - 5);
             this.thePlayers[index].setMoney(this.thePlayers[index].getMoney() - amount);
-        } else if(this.stage == Stages.BET){
+        } else if(this.stage == s.BET){
             while(amount > this.thePlayers[index].getMoney()){
                 System.out.println("You don't have that amount of money. Please choose a different bet");
                 amount = sc.nextInt();
@@ -76,7 +80,7 @@ public class Game{
             this.thePlayers[index].getTokenCounter().put(Tokens.FIVE, this.thePlayers[index].getKeyValue(Tokens.FIVE) - tokenChange[0]);
             this.thePlayers[index].getTokenCounter().put(Tokens.ONE, this.thePlayers[index].getKeyValue(Tokens.ONE) - tokenChange[0]);
 
-        }
+        } 
         
     }
     public int[] moneyToTokens(int index, int amount){ //need to specify the index of the player

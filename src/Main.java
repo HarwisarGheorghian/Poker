@@ -18,16 +18,11 @@ public class Main{
         //System.out.println("Make your bets!");
 
 
-        game.setStage(Stages.BET); //set it to bet
-        int bet = sc.nextInt();
-        for(int i = 0; i < playerCount; i++){
-            System.out.println("Player" + i + ", what would you like to do?");
-            String choice = sc.next();
-
-            if(choice == Stages.BET.getDescription()){
-
-            }
-            //game.maxBet(i, bet);
+        int bet = 0;
+        for(int i = 0; i < playerCount; i++){ // Initial Stage
+            System.out.println("Make your bets!");
+            bet = sc.nextInt();
+            game.makeBet(i, bet, Stages.START);
         }
         
     }
