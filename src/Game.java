@@ -1,20 +1,33 @@
 package src;
 import src.*;
 import java.util.*;
-import java.util.function.Consumer;
 public class Game{
     Player[] thePlayers;
     private Stages stage; 
     public enum Stages{
-        START,
-        DEALCARDS,
-        BET,
-        PLACECARDS,
-        END;
+        START("Start"),
+        DEALCARDS("Deal"),
+        BET("Bet"),
+        FOLD("Fold"),
+        CHECK("Check"),
+        PLACECARDS("Place cards"),
+        END("End");
+
+        private String desc;
+
+        Stages(String description){
+            this.desc = description;
+        }
+
+        public String getDescription(){
+            return this.desc;
+        }
     }
 
-    public Game(Player[] players){
-        this.thePlayers = players;
+    private String getStageDesc = stage.getDescription();
+
+    public Game(Player[] player){
+        this.thePlayers = player;
     }
 
     public Stages getStage(){
@@ -25,34 +38,44 @@ public class Game{
         stage = set;
     }
 
+    public String getStageDescription(){
+        return this.getStageDesc;
+    }
+
     //Allows player the specify the amount of tokens used. Changes per stage
-    public void maxBet(int index){ //need to specify the index of the player
+    public void makeBet(int index, int amount){ //need to specify the index of the player
         Scanner sc = new Scanner(System.in);
-        int amt = sc.nextInt();
         if(this.stage == Stages.START){ // You can't use any tokens above 5
-            while(amt > 5){ // repeat until they choose a value less than 5
+            while(amount > 5){ // repeat until they choose a value less than 5
                 System.out.println("You cant bet more than 5 dollars during the start phase.");
-                amt = sc.nextInt();
+                amount = sc.nextInt();
             }
             this.thePlayers[index].getTokenCounter().put(Tokens.ONE, this.thePlayers[index].getKeyValue(Tokens.ONE) - 5);
-            this.thePlayers[index].setMoney(this.thePlayers[index].getMoney() - amt);
+            this.thePlayers[index].setMoney(this.thePlayers[index].getMoney() - amount);
         } else if(this.stage == Stages.BET){
-            while(amt > this.thePlayers[index].getMoney()){
+            while(amount > this.thePlayers[index].getMoney()){
                 System.out.println("You don't have that amount of money. Please choose a different bet");
-                amt = sc.nextInt();
+                amount = sc.nextInt();
             }
-            int[] tokenChange = moneyToTokens(index, amt);
+            int[] tokenChange = moneyToTokens(index, amount);
             
-            int j = 0;
-            final Integer innerJ = new Integer(j); //index to iterate through moneyToTokens returned array
+            /*int j = 0;
+            final Integer innerJ = j; //index to iterate through moneyToTokens returned array
             Consumer<Map.Entry<Tokens, Integer>> action = entry ->
             {
-                this.thePlayers[index].getTokenCounter().put(entry.getKey(), this.thePlayers[index].getKeyValue(entry.getKey()) - tokenChange[innerJ]);
-                innerJ = innerJ + 1;
+                int innerinnerj = innerJ;
+                this.thePlayers[index].getTokenCounter().put(entry.getKey(), this.thePlayers[index].getKeyValue(entry.getKey()) - tokenChange[innerinnerj]);
+                innerinnerj++;
+                innerJ = innerinnerj;
             };
+            this.thePlayers[index].getTokenCounter().entrySet().forEach(action);*/
 
+            //Im just gonna brute force it
+            this.thePlayers[index].getTokenCounter().put(Tokens.FIFTY, this.thePlayers[index].getKeyValue(Tokens.FIFTY) - tokenChange[0]);
+            this.thePlayers[index].getTokenCounter().put(Tokens.TEN, this.thePlayers[index].getKeyValue(Tokens.TEN) - tokenChange[0]);
+            this.thePlayers[index].getTokenCounter().put(Tokens.FIVE, this.thePlayers[index].getKeyValue(Tokens.FIVE) - tokenChange[0]);
+            this.thePlayers[index].getTokenCounter().put(Tokens.ONE, this.thePlayers[index].getKeyValue(Tokens.ONE) - tokenChange[0]);
 
-            this.thePlayers[index].getTokenCounter().entrySet().forEach(action);
         }
         
     }
