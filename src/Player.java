@@ -47,6 +47,12 @@ public class Player{
         return tokensCounter.get(token);
     }
 
+    public ArrayList<String> getHand(){
+        return hand;
+    }
+
+
+
     public String toString(){
         String stats = "STATS:\n" 
         + "Single Tokens: " + tokensCounter.get(Tokens.ONE) + "\n" 

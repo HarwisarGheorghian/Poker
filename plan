@@ -8,12 +8,8 @@ To Do
         Bet means increasing the amount you bet for the game
         Fold means you withdraw from the game and sacrifice the amount that you bet
 
-    --Step 4: Dealer places 3 careds
-    --Step 5: Each player makes a check, bet, or fold
-    --Step 6: Dealer deals 1 cards
-    --Step 7: Each player makes a check, bet or fold
-    --Step 8: Dealer deals 1 last card 
-    --Step 9: Players call their highest hand. Whoever has the highest hand wins the game and gets the money
+    --Step 4: Dealer places 5 careds
+    --Step 5: Players call their highest hand. Whoever has the highest hand wins the game and gets the money
 
 Game Class: Will handle Game Logic
 Player Class: Will handle all players and their attributes

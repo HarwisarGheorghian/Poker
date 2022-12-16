@@ -62,18 +62,7 @@ public class Game{
                 amount = sc.nextInt();
             }
             int[] tokenChange = moneyToTokens(index, amount);
-            
-            /*int j = 0;
-            final Integer innerJ = j; //index to iterate through moneyToTokens returned array
-            Consumer<Map.Entry<Tokens, Integer>> action = entry ->
-            {
-                int innerinnerj = innerJ;
-                this.thePlayers[index].getTokenCounter().put(entry.getKey(), this.thePlayers[index].getKeyValue(entry.getKey()) - tokenChange[innerinnerj]);
-                innerinnerj++;
-                innerJ = innerinnerj;
-            };
-            this.thePlayers[index].getTokenCounter().entrySet().forEach(action);*/
-
+        
             //Im just gonna brute force it
             this.thePlayers[index].getTokenCounter().put(Tokens.FIFTY, this.thePlayers[index].getKeyValue(Tokens.FIFTY) - tokenChange[0]);
             this.thePlayers[index].getTokenCounter().put(Tokens.TEN, this.thePlayers[index].getKeyValue(Tokens.TEN) - tokenChange[0]);
@@ -102,3 +91,14 @@ public class Game{
 
     }
 }
+
+            /*int j = 0;
+            final Integer innerJ = j; //index to iterate through moneyToTokens returned array
+            Consumer<Map.Entry<Tokens, Integer>> action = entry ->
+            {
+                int innerinnerj = innerJ;
+                this.thePlayers[index].getTokenCounter().put(entry.getKey(), this.thePlayers[index].getKeyValue(entry.getKey()) - tokenChange[innerinnerj]);
+                innerinnerj++;
+                innerJ = innerinnerj;
+            };
+            this.thePlayers[index].getTokenCounter().entrySet().forEach(action);*/
