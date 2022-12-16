@@ -24,7 +24,7 @@ public class Game{
         }
     }
 
-    private String getStageDesc = stage.getDescription();
+    //private String getStageDesc = stage.getDescription(); Useless
 
     public Game(Player[] player){
         this.thePlayers = player;
@@ -38,9 +38,9 @@ public class Game{
         stage = set;
     }
 
-    public String getStageDescription(){
+    /*public String getStageDescription(){
         return this.getStageDesc;
-    }
+    }*/
 
     //Allows player the specify the amount of tokens used. Changes per stage
     public void makeBet(int index, int amount){ //need to specify the index of the player

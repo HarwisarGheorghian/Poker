@@ -17,13 +17,15 @@ public class Main{
         }
         //System.out.println("Make your bets!");
 
+
+        game.setStage(Stages.BET); //set it to bet
         int bet = sc.nextInt();
         for(int i = 0; i < playerCount; i++){
             System.out.println("Player" + i + ", what would you like to do?");
             String choice = sc.next();
 
-            if(choice.equals(game.getStageDescription())){
-                
+            if(choice == Stages.BET.getDescription()){
+
             }
             //game.maxBet(i, bet);
         }
