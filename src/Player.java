@@ -1,4 +1,7 @@
+package src;
+import src.*;
 import java.util.*;
+import java.util.stream.Stream;
 enum Tokens{
     ONE(1),
     FIVE(5),
@@ -8,6 +11,10 @@ enum Tokens{
     private int value;
     Tokens(int value){
         this.value = value;
+    }
+
+    public static Stream<Tokens> stream() {
+        return Stream.of(Tokens.values());
     }
 }
 

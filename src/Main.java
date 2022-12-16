@@ -1,3 +1,5 @@
+package src;
+import src.*;
 import java.util.Scanner;
 public class Main{
     public static int totalAmt = 0;
