@@ -21,10 +21,10 @@ enum Tokens{
 public class Player{
 
     private int money;
+    private ArrayList<String> hand = new ArrayList<String>();
     private EnumMap<Tokens,Integer> tokensCounter = new EnumMap<Tokens,Integer>(Tokens.class);
     public Player(){
         this.money = 200;
-        this.tokensCounter = tokensCounter;
         tokensCounter.put(Tokens.ONE, 10);
         tokensCounter.put(Tokens.FIVE, 8);
         tokensCounter.put(Tokens.TEN, 5);
