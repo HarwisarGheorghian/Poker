@@ -13,10 +13,13 @@ public class Main{
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to Poker! How many players are playing?");
         int playerCount = sc.nextInt();
-        Player[] players = new Player[playerCount];
+        ArrayList<Player> players = new ArrayList<Player>(playerCount);
         Game game = new Game(players);
         for(int i = 0; i < playerCount; i++){
-            players[i] = new Player();
+            System.out.println("What will you name yourself Player 1?");
+            String name = sc.next();
+            players.add(new Player(name));
+            System.out.println("Welcome " + name + "!\n");
         }
         //System.out.println("Make your bets!");
 
@@ -24,30 +27,51 @@ public class Main{
         int bet = 0;
         for(int i = 0; i < playerCount; i++){ // Initial Stage
             System.out.println("Make your bets!");
+            System.out.print("Player " + i + ": ");
             bet = sc.nextInt();
             game.makeBet(i, bet, Stages.START);
         }
 
         //Step 2: Dealer deals 2 cards
         Random rand = new Random();
-        ArrayList<Integer> indices = new ArrayList<Integer>(
-            Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-            14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
-            27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
-            40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52));
+        ArrayList<Integer> indices = new ArrayList<Integer>();
 
         for(int i = 0; i < playerCount; i++){
             int cardIndex = 0;
             for(int j = 0; j < 2; j++){
                 cardIndex = rand.nextInt(52);
-                while(indices.indexOf(cardIndex) == -1){
+                while(!indices.contains(cardIndex)){
                     cardIndex = rand.nextInt(52);
                 }
-                players[i].getHand().add(cards[cardIndex]);
+                indices.add(cardIndex);
+                players.get(i).getHand().add(cards[cardIndex]);
                 indices.remove(cardIndex);
             }
         }
 
         //Step 3: Bet, Check, or Fold
+        Stages[] validStages= {Stages.BET, Stages.CHECK, Stages.FOLD};
+        for(int i = 0; i < playerCount; i++){
+            System.out.println("You can bet, check, or fold here. What would you like to do?");
+            String choice = sc.next();
+
+            do {
+                System.out.println("You did not choose a valid option");
+                choice = sc.next();
+            } while(!game.isValidOption(validStages, choice));
+
+            if(choice.equals(Stages.BET.getDescription())){
+                System.out.println("How much do you want to bet?");
+                int betAmt = sc.nextInt();
+                game.makeBet(i, betAmt, Stages.BET);
+            } else if (choice.equals(Stages.CHECK.getDescription())){
+                game.check(i);
+            } else if(choice.equals(Stages.FOLD.getDescription())){
+                game.fold(i);
+            }
+        }
+
+        //Step 4: Dealer places 5 cards
+        
     }
 }

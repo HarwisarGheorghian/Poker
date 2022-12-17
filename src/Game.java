@@ -2,7 +2,7 @@ package src;
 import src.*;
 import java.util.*;
 public class Game{
-    Player[] thePlayers;
+    ArrayList<Player> thePlayers;
     private Stages stage; 
     public enum Stages{
         START("Start"),
@@ -24,9 +24,7 @@ public class Game{
         }
     }
 
-    //private String getStageDesc = stage.getDescription(); Useless
-
-    public Game(Player[] player){
+    public Game(ArrayList<Player> player){
         this.thePlayers = player;
     }
 
@@ -38,12 +36,6 @@ public class Game{
         stage = set;
     }
 
-    /*public String getStageDescription(){
-        return this.getStageDesc;
-    }*/
-
-    //makeBet uses a class made (Game made) stage value. Since that value is dependent on the user and not the game,
-    // we need to add a parameter
 
     //Allows player the specify the amount of tokens used. Changes per stage
     public void makeBet(int index, int amount, Stages s){ //need to specify the index of the player
@@ -54,24 +46,45 @@ public class Game{
                 System.out.println("You cant bet more than 5 dollars during the start phase.");
                 amount = sc.nextInt();
             }
-            this.thePlayers[index].getTokenCounter().put(Tokens.ONE, this.thePlayers[index].getKeyValue(Tokens.ONE) - 5);
-            this.thePlayers[index].setMoney(this.thePlayers[index].getMoney() - amount);
+            this.thePlayers.get(index).getTokenCounter().put(Tokens.ONE, this.thePlayers.get(index).getKeyValue(Tokens.ONE) - 5);
+            this.thePlayers.get(index).setMoney(this.thePlayers.get(index).getMoney() - amount);
         } else if(this.stage == s.BET){
-            while(amount > this.thePlayers[index].getMoney()){
+            while(amount > this.thePlayers.get(index).getMoney()){
                 System.out.println("You don't have that amount of money. Please choose a different bet");
                 amount = sc.nextInt();
             }
             int[] tokenChange = moneyToTokens(index, amount);
         
             //Im just gonna brute force it
-            this.thePlayers[index].getTokenCounter().put(Tokens.FIFTY, this.thePlayers[index].getKeyValue(Tokens.FIFTY) - tokenChange[0]);
-            this.thePlayers[index].getTokenCounter().put(Tokens.TEN, this.thePlayers[index].getKeyValue(Tokens.TEN) - tokenChange[0]);
-            this.thePlayers[index].getTokenCounter().put(Tokens.FIVE, this.thePlayers[index].getKeyValue(Tokens.FIVE) - tokenChange[0]);
-            this.thePlayers[index].getTokenCounter().put(Tokens.ONE, this.thePlayers[index].getKeyValue(Tokens.ONE) - tokenChange[0]);
+            this.thePlayers.get(index).getTokenCounter().put(Tokens.FIFTY, this.thePlayers.get(index).getKeyValue(Tokens.FIFTY) - tokenChange[0]);
+            this.thePlayers.get(index).getTokenCounter().put(Tokens.TEN, this.thePlayers.get(index).getKeyValue(Tokens.TEN) - tokenChange[0]);
+            this.thePlayers.get(index).getTokenCounter().put(Tokens.FIVE, this.thePlayers.get(index).getKeyValue(Tokens.FIVE) - tokenChange[0]);
+            this.thePlayers.get(index).getTokenCounter().put(Tokens.ONE, this.thePlayers.get(index).getKeyValue(Tokens.ONE) - tokenChange[0]);
 
-        } 
-        
+        }
     }
+
+    public void check(int index){
+        System.out.println("You've decided not to bet anything");
+        System.out.println("Current stats:");
+        this.thePlayers.get(index).toString();
+    }
+
+    public void fold(int index){
+        System.out.println("You've decided to remove yourself from the game.");
+        this.thePlayers.remove(this.thePlayers.get(index));
+    }
+    
+    public boolean isValidOption(Stages[] validOptions, String choice){
+        boolean valid = false;
+        for(int i = 0; i < validOptions.length; i++){
+            if(choice.equals(validOptions[i].getDescription())){
+                valid = true;
+            }
+        }
+        return valid;
+    }
+
     public int[] moneyToTokens(int index, int amount){ //need to specify the index of the player
         int remainder = 0;
         int[] tokenCounts = new int[4];
