@@ -4,10 +4,7 @@ import src.Game.Stages;
 
 import java.util.*;
 public class Main{
-    public static String[] cards = {"C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJack", "CQueen", "CKing", "CAce",
-    "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "DJack", "DQueen", "DKing", "DAce",
-    "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "HJack", "HQueen", "HKing", "HAce",
-    "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "SJack", "SQueen", "SKing", "SAce"};
+
     public static void main(String[] args){
         
         Scanner sc = new Scanner(System.in);
@@ -15,6 +12,7 @@ public class Main{
         int playerCount = sc.nextInt();
         ArrayList<Player> players = new ArrayList<Player>(playerCount);
         Game game = new Game(players);
+        Deck deck = new Deck();
         for(int i = 0; i < playerCount; i++){
             System.out.println("What will you name yourself Player 1?");
             String name = sc.next();
@@ -44,8 +42,8 @@ public class Main{
                     cardIndex = rand.nextInt(52);
                 }
                 indices.add(cardIndex);
-                players.get(i).getHand().add(cards[cardIndex]);
-                indices.remove(cardIndex);
+                players.get(i).getHand().add(deck.getDeck().get(cardIndex));
+                deck.getDeck().remove(cardIndex);
             }
         }
 
