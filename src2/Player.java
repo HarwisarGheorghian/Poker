@@ -18,6 +18,10 @@ public class Player{
         tokenCounter.put(Token.FIFTY, 1);
     }
 
+    public EnumMap<Token, Integer> getTokenCounter(){
+        return tokenCounter;
+    }
+
     public String getName(){
         return this.name;
     }
