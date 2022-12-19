@@ -6,7 +6,8 @@ import src2.*;
 public class Player{
     private int money;
     private String name;
-    private Card[] hand;
+    private Card[] hand = new Card[2];
+    private String[] displayingHand = new String[2];
     private EnumMap<Token, Integer> tokenCounter = new EnumMap<Token, Integer>(Token.class);
 
     public Player(String name){
@@ -28,6 +29,12 @@ public class Player{
 
     public void setName(String name){
         this.name = name;
+    }
+
+    public String[] getDisplayHand(){
+        displayingHand[0] = hand[0].displayCard();
+        displayingHand[1] = hand[1].displayCard();
+        return displayingHand;
     }
 
     public Card[] draw(Deck deck){
