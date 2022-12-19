@@ -4,11 +4,14 @@ import java.util.*;
 
 public class Main{
     public static void main(String[] args){
+        //Creates pool map
         EnumMap<Token, Integer> TotalAmount = new EnumMap<>(Map.of(Token.FIFTY, 0, Token.TEN, 0, Token.FIVE, 0, Token.ONE, 0));
+        
         Scanner sc = new Scanner(System.in);
         int playerCount;
         System.out.println("Welcome to broken poker! How many players are playing?");
         playerCount = sc.nextInt();
+        //Player list
         ArrayList<Player> players = new ArrayList<Player>(playerCount);
         Deck deck = new Deck();
         System.out.println("There are " + playerCount + " players playing. Please state their names.");
@@ -21,22 +24,27 @@ public class Main{
 
             System.out.println(players.get(i).tokenStats());
         }
+
+        //Second step: Players check, bet, or fold
         int counter = 0;
         while(players.size() > counter){
             System.out.println("Ok " + players.get(counter).getName() + ". Now choose to either bet, check, or fold!");
             String choice = sc.next();
 
+            //Repeats the process until the person types in the correct input
             while(!(choice.equals(Stage.BET.getDescription()) || choice.equals(Stage.CHECK.getDescription()) || choice.equals(Stage.FOLD.getDescription())))
             {
                 System.out.println("You did not make a valid choice. Please only choose Bet, Check, or Fold");
                 choice = sc.next();
             }
+
+
             if(choice.equals(Stage.BET.getDescription())){
                 System.out.println("How much are you betting?");
                 int betAmt = sc.nextInt();
-                EnumMap<Token, Integer> playerBetMap = players.get(counter).convertTokens(betAmt);
+                EnumMap<Token, Integer> playerBetMap = players.get(counter).convertTokens(betAmt);//Converts bet amount of token map
                 
-
+                //Adds bet map to pool map
                 players.get(counter).setTokenCounter(Token.FIFTY, players.get(counter).getTokenCounter().get(Token.FIFTY) - playerBetMap.get(Token.FIFTY));
                 players.get(counter).setTokenCounter(Token.TEN, players.get(counter).getTokenCounter().get(Token.TEN) - playerBetMap.get(Token.TEN));
                 players.get(counter).setTokenCounter(Token.FIVE, players.get(counter).getTokenCounter().get(Token.FIVE) - playerBetMap.get(Token.FIVE));
@@ -51,12 +59,12 @@ public class Main{
                 System.out.println("Here are your current tokens.");
                 System.out.println(players.get(counter).tokenStats());
                 counter++;
-            } else if (choice.equals(Stage.CHECK.getDescription())){
+            } else if (choice.equals(Stage.CHECK.getDescription())){ //Keeps position but no bet
                 System.out.println("You stay in the game but don't bet anything.");
                 System.out.println("Here are your current tokens.");
                 System.out.println(players.get(counter).tokenStats());
                 counter++;
-            } else if(choice.equals(Stage.FOLD.getDescription())){
+            } else if(choice.equals(Stage.FOLD.getDescription())){ //Removes player from array
                 System.out.println("Player " + players.get(counter).getName() + " has quit.");
                 players.remove(counter);
             }
@@ -64,7 +72,7 @@ public class Main{
 
         }
 
-        if(players.size() == 0){
+        if(players.size() == 0){ // Quits the game
             System.out.println("Everyone has quit. The game is over...");
             System.exit(0);
         }
