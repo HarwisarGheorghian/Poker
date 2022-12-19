@@ -80,8 +80,9 @@ public class Main{
         //Each player gets two cards
         for(int i = 0; i < players.size(); i++){
             players.get(i).draw(deck);
-            System.out.println("Here is you set of cards");
-            System.out.println("Card 1: " + players.get(i).getDisplayHand()[0] + "\n" + "Card 2: " + players.get(i).getDisplayHand()[1]);
+            System.out.println("Here is you set of cards\n");
+            System.out.println(players.get(i).getName());
+            System.out.println("Card 1: " + players.get(i).getDisplayHand()[0] + "\n" + "Card 2: " + players.get(i).getDisplayHand()[1] + "\n");
         }
 
         //Compare
@@ -104,8 +105,6 @@ public class Main{
         System.out.println(correctPlayer.tokenStats());
         
         System.out.println("They won " + correctPlayer.TokensToMoney());
-
-        System.out.println(correctPlayer.getTokenCounter().get(Token.FIFTY) + TotalAmount.get(Token.FIFTY));
         
     }
 }
