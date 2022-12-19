@@ -19,6 +19,14 @@ public class Player{
         tokenCounter.put(Token.FIFTY, 1);
     }
 
+    public int getMoney(){
+        return this.money;
+    }
+    
+    public void setMoney(int money){
+        this.money = money;
+    }
+
     public EnumMap<Token, Integer> getTokenCounter(){
         return tokenCounter;
     }

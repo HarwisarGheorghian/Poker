@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Main{
     public static void main(String[] args){
-        EnumMap<Token, Integer> TotalAmount = new EnumMap<Token, Integer>(Map.of(Token.FIFTY, 0, Token.TEN, 0, Token.FIVE, 0, Token.ONE, 0));
+        EnumMap<Token, Integer> TotalAmount = new EnumMap<>(Map.of(Token.FIFTY, 0, Token.TEN, 0, Token.FIVE, 0, Token.ONE, 0));
         Scanner sc = new Scanner(System.in);
         int playerCount;
         System.out.println("Welcome to broken poker! How many players are playing?");
@@ -35,15 +35,19 @@ public class Main{
                 System.out.println("How much are you betting?");
                 int betAmt = sc.nextInt();
                 EnumMap<Token, Integer> playerBetMap = players.get(counter).convertTokens(betAmt);
-                TotalAmount.put(Token.FIFTY, TotalAmount.get(Token.FIFTY) + playerBetMap.get(Token.FIFTY));
-                TotalAmount.put(Token.TEN, TotalAmount.get(Token.TEN) + playerBetMap.get(Token.FIFTY));
-                TotalAmount.put(Token.FIVE, TotalAmount.get(Token.FIVE) + playerBetMap.get(Token.FIFTY));
-                TotalAmount.put(Token.ONE, TotalAmount.get(Token.ONE) + playerBetMap.get(Token.FIFTY));
+                
 
                 players.get(counter).setTokenCounter(Token.FIFTY, players.get(counter).getTokenCounter().get(Token.FIFTY) - playerBetMap.get(Token.FIFTY));
                 players.get(counter).setTokenCounter(Token.TEN, players.get(counter).getTokenCounter().get(Token.TEN) - playerBetMap.get(Token.TEN));
                 players.get(counter).setTokenCounter(Token.FIVE, players.get(counter).getTokenCounter().get(Token.FIVE) - playerBetMap.get(Token.FIVE));
                 players.get(counter).setTokenCounter(Token.ONE, players.get(counter).getTokenCounter().get(Token.ONE) - playerBetMap.get(Token.ONE));
+
+                TotalAmount.put(Token.FIFTY, TotalAmount.get(Token.FIFTY) + playerBetMap.get(Token.FIFTY));
+                TotalAmount.put(Token.TEN, TotalAmount.get(Token.TEN) + playerBetMap.get(Token.TEN));
+                TotalAmount.put(Token.FIVE, TotalAmount.get(Token.FIVE) + playerBetMap.get(Token.FIVE));
+                TotalAmount.put(Token.ONE, TotalAmount.get(Token.ONE) + playerBetMap.get(Token.ONE));
+
+
                 System.out.println("Here are your current tokens.");
                 System.out.println(players.get(counter).tokenStats());
                 counter++;
@@ -92,6 +96,8 @@ public class Main{
         System.out.println(correctPlayer.tokenStats());
         
         System.out.println("They won " + correctPlayer.TokensToMoney());
+
+        System.out.println(correctPlayer.getTokenCounter().get(Token.FIFTY) + TotalAmount.get(Token.FIFTY));
         
     }
 }
