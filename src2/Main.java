@@ -3,9 +3,8 @@ import src2.*;
 import java.util.*;
 
 public class Main{
-    static EnumMap<Token, Integer> TotalAmount = new EnumMap<Token, Integer>(Token.class);
     public static void main(String[] args){
-        
+        EnumMap<Token, Integer> TotalAmount = new EnumMap<Token, Integer>(Map.of(Token.FIFTY, 0, Token.TEN, 0, Token.FIVE, 0, Token.ONE, 0));
         Scanner sc = new Scanner(System.in);
         int playerCount;
         System.out.println("Welcome to broken poker! How many players are playing?");
@@ -14,33 +13,48 @@ public class Main{
         Deck deck = new Deck();
         System.out.println("There are " + playerCount + " players playing. Please state their names.");
         //Initial step
-        for(int i = 0; i < players.size(); i++){
+        for(int i = 0; i < playerCount; i++){
             System.out.println("What is your name?");
             String name = sc.next();
+            players.add(new Player());
             players.get(i).setName(name);
 
             System.out.println(players.get(i).tokenStats());
-
-            System.out.println("Ok " + players.get(i).getName() + ". Now choose to either bet, check, or fold!");
+        }
+        int counter = 0;
+        while(players.size() > counter){
+            System.out.println("Ok " + players.get(counter).getName() + ". Now choose to either bet, check, or fold!");
             String choice = sc.next();
+
+            while(!(choice.equals(Stage.BET.getDescription()) || choice.equals(Stage.CHECK.getDescription()) || choice.equals(Stage.FOLD.getDescription())))
+            {
+                System.out.println("You did not make a valid choice. Please only choose Bet, Check, or Fold");
+                choice = sc.next();
+            }
             if(choice.equals(Stage.BET.getDescription())){
                 System.out.println("How much are you betting?");
                 int betAmt = sc.nextInt();
-                EnumMap<Token, Integer> playerBetMap = players.get(i).convertTokens(betAmt);
+                EnumMap<Token, Integer> playerBetMap = players.get(counter).convertTokens(betAmt);
                 TotalAmount.put(Token.FIFTY, TotalAmount.get(Token.FIFTY) + playerBetMap.get(Token.FIFTY));
                 TotalAmount.put(Token.TEN, TotalAmount.get(Token.TEN) + playerBetMap.get(Token.FIFTY));
                 TotalAmount.put(Token.FIVE, TotalAmount.get(Token.FIVE) + playerBetMap.get(Token.FIFTY));
                 TotalAmount.put(Token.ONE, TotalAmount.get(Token.ONE) + playerBetMap.get(Token.FIFTY));
 
-                players.get(i).getTokenCounter().put(Token.FIFTY, players.get(i).getTokenCounter().get(Token.FIFTY) - playerBetMap.get(Token.FIFTY));
-                players.get(i).getTokenCounter().put(Token.TEN, players.get(i).getTokenCounter().get(Token.TEN) - playerBetMap.get(Token.TEN));
-                players.get(i).getTokenCounter().put(Token.FIVE, players.get(i).getTokenCounter().get(Token.FIVE) - playerBetMap.get(Token.FIVE));
-                players.get(i).getTokenCounter().put(Token.ONE, players.get(i).getTokenCounter().get(Token.ONE) - playerBetMap.get(Token.ONE));
+                players.get(counter).setTokenCounter(Token.FIFTY, players.get(counter).getTokenCounter().get(Token.FIFTY) - playerBetMap.get(Token.FIFTY));
+                players.get(counter).setTokenCounter(Token.TEN, players.get(counter).getTokenCounter().get(Token.TEN) - playerBetMap.get(Token.TEN));
+                players.get(counter).setTokenCounter(Token.FIVE, players.get(counter).getTokenCounter().get(Token.FIVE) - playerBetMap.get(Token.FIVE));
+                players.get(counter).setTokenCounter(Token.ONE, players.get(counter).getTokenCounter().get(Token.ONE) - playerBetMap.get(Token.ONE));
+                System.out.println("Here are your current tokens.");
+                System.out.println(players.get(counter).tokenStats());
+                counter++;
             } else if (choice.equals(Stage.CHECK.getDescription())){
                 System.out.println("You stay in the game but don't bet anything.");
+                System.out.println("Here are your current tokens.");
+                System.out.println(players.get(counter).tokenStats());
+                counter++;
             } else if(choice.equals(Stage.FOLD.getDescription())){
-                System.out.println("Player " + players.get(i).getName() + " has quit.");
-                players.remove(i);
+                System.out.println("Player " + players.get(counter).getName() + " has quit.");
+                players.remove(counter);
             }
 
 
@@ -52,7 +66,7 @@ public class Main{
         }
 
         //Each player gets two cards
-        for(int i = 0; i < playerCount; i++){
+        for(int i = 0; i < players.size(); i++){
             players.get(i).draw(deck);
             System.out.println("Here is you set of cards");
             System.out.println("Card 1: " + players.get(i).getDisplayHand()[0] + "\n" + "Card 2: " + players.get(i).getDisplayHand()[1]);
@@ -61,15 +75,23 @@ public class Main{
         //Compare
         int maxVal = 0;
         Player correctPlayer = new Player();
-        for(int i = 0; i < playerCount; i++){
+        for(int i = 0; i < players.size(); i++){
             if(players.get(i).getTotalRankValue() >= maxVal){
                 maxVal = players.get(i).getTotalRankValue();
                 correctPlayer = players.get(i);
             }
         }
         System.out.println("The player who won was " + correctPlayer.getName() + "!");
+
+        correctPlayer.setTokenCounter(Token.FIFTY, correctPlayer.getTokenCounter().get(Token.FIFTY) + TotalAmount.get(Token.FIFTY));
+        correctPlayer.setTokenCounter(Token.TEN, correctPlayer.getTokenCounter().get(Token.TEN) + TotalAmount.get(Token.TEN));
+        correctPlayer.setTokenCounter(Token.FIVE, correctPlayer.getTokenCounter().get(Token.FIVE) + TotalAmount.get(Token.FIVE));
+        correctPlayer.setTokenCounter(Token.ONE, correctPlayer.getTokenCounter().get(Token.ONE) + TotalAmount.get(Token.ONE));
+
         System.out.println("Their stats:");
         System.out.println(correctPlayer.tokenStats());
+        
+        System.out.println("They won " + correctPlayer.TokensToMoney());
         
     }
 }

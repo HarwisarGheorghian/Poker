@@ -23,6 +23,10 @@ public class Player{
         return tokenCounter;
     }
 
+    public void setTokenCounter(Token t1, int x){
+        tokenCounter.put(t1, x);
+    }
+
     public String getName(){
         return this.name;
     }
@@ -51,12 +55,15 @@ public class Player{
         EnumMap<Token, Integer> convertedTokens = new EnumMap<Token, Integer>(Token.class); 
         int remainder = 0;
         remainder = bet / 50;
+        remainder = Math.min(remainder, tokenCounter.get(Token.FIFTY));
         convertedTokens.put(Token.FIFTY, remainder);
         bet -= remainder * 50;
         remainder = bet / 10;
+        remainder = Math.min(remainder, tokenCounter.get(Token.TEN));
         convertedTokens.put(Token.TEN, remainder);
         bet -= remainder * 10;
         remainder = bet / 5;
+        remainder = Math.min(remainder, tokenCounter.get(Token.FIVE));
         convertedTokens.put(Token.FIVE, remainder);
         bet -= remainder * 5;
         remainder = bet / 1;
@@ -64,8 +71,12 @@ public class Player{
         return convertedTokens;
     }
 
+    public int TokensToMoney(){
+        return 50 * tokenCounter.get(Token.FIFTY) + 10 * tokenCounter.get(Token.TEN) + 5 * tokenCounter.get(Token.FIVE) + tokenCounter.get(Token.ONE);
+    }
+
     public String tokenStats(){
-        return name + "\n" + "50 Token: " + tokenCounter.get(Token.FIFTY) + "\n" + "10 Token: " + tokenCounter.get(Token.TEN)
+        return "Player " + name + ":\n" + "50 Token: " + tokenCounter.get(Token.FIFTY) + "\n" + "10 Token: " + tokenCounter.get(Token.TEN)
         + "\n" + "5 Token: " + tokenCounter.get(Token.FIVE) + "\n" + "1 Token: " + tokenCounter.get(Token.ONE);
     }
 }

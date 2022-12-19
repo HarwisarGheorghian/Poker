@@ -41,6 +41,7 @@ public class Card{
                 displaySuit = "C";
                 break;
             default:
+                System.out.println("somethingbrokies");
                 break;
         }
 

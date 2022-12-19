@@ -6,8 +6,8 @@ public class Deck{
     public Deck(){
         for(int i = 0; i < 52; i++){
             deck.add(new Card());
-            deck.get(i).setRank(i % 4 + 1);
-            deck.get(i).setSuit(i % 13 + 1);
+            deck.get(i).setRank(i % 13 + 1);
+            deck.get(i).setSuit(i % 4 + 1);
         }
         shuffle();
     }
