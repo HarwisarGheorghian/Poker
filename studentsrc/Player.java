@@ -9,21 +9,21 @@ public class Player{
     private String[] displayingHand = new String[2]; //Creates a string based hand
     private EnumMap<Token, Integer> tokenCounter = new EnumMap<Token, Integer>(Token.class);
 
-    public Player(){
+    //Define the player constructor
         //Assign money to 100
         tokenCounter.put(Token.ONE, 10);
         tokenCounter.put(Token.FIVE, 2);
         tokenCounter.put(Token.TEN, 3);
         tokenCounter.put(Token.FIFTY, 1);
-    }
-
-    public int getMoney(){ //Getter
-        //return money
-    }
     
-    public void setMoney(int money){ //Setter
-        //set ,pmey
-    }
+
+    //make money getter
+        //return money
+    
+    
+    //make moeny setter
+        //set money
+    
 
     public EnumMap<Token, Integer> getTokenCounter(){ //Getter
         return tokenCounter;
@@ -33,13 +33,7 @@ public class Player{
         tokenCounter.put(t1, x);
     }
 
-    public String getName(){ //Getter
-        return this.name;
-    }
-
-    public void setName(String name){ //Setter
-        this.name = name;
-    }
+    //Make getters and setters for name
 
     public int getTotalRankValue(){ //Getter
         return totalRankValue;

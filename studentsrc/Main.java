@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Main{
     public static void main(String[] args){
-        //Creates a enum map to determine the amount of tokens everyone have collectively put into the pool
+        EnumMap<Token, Integer> TotalAmount = new EnumMap<>(Map.of(Token.FIFTY, 0, Token.TEN, 0, Token.FIVE, 0, Token.ONE, 0));
         EnumMap<Token, Integer> TotalAmount = new EnumMap<>(Map.of(Token.FIFTY, 0, Token.TEN, 0, Token.FIVE, 0, Token.ONE, 0));
         
         //Create an Scanner Object with input of System.in
@@ -12,19 +12,19 @@ public class Main{
         System.out.println("Welcome to broken poker! How many players are playing?");
         playerCount = sc.nextInt();
         //Create an ArrayList of type Player with the name players and an initial capacity of playerCount.
-        Deck deck = new Deck(); // Creates the deck
+        //Create the Deck object
         System.out.println("There are " + playerCount + " players playing. Please state their names.");
         //Initial step
         for(int i = 0; i < playerCount; i++){
             System.out.println("What is your name?");
             String name = sc.next(); // Gets the name of each player
             players.add(new Player());
-            players.get(i).setName(name); // Sets their name using the setName method
+            // // Sets their name using the setName method (parameter is name)
 
             System.out.println(players.get(i).tokenStats());
         }
         int counter = 0;
-        while(//Make a condition statement for the size){
+        while(players.size() > counter){
             System.out.println("Ok " + players.get(counter).getName() + ". Now choose to either bet, check, or fold!");
             String choice = sc.next();
 
@@ -75,7 +75,8 @@ public class Main{
 
         //Each player gets two cards
         for(int i = 0; i < players.size(); i++){
-            players.get(i).draw(deck); //Draws 2 cards from the deck
+            //Use the player object to draw 2 cards from the desk using the draw method from the player class. Include
+            //the deck object as well
             System.out.println("Here is you set of cards");
             System.out.println("Card 1: " + players.get(i).getDisplayHand()[0] + "\n" + "Card 2: " + players.get(i).getDisplayHand()[1]);
         }

@@ -1,9 +1,9 @@
 package studentsrc;
 import studentsrc.*;
 public class Card{
-    private int suit;
-    private int rank;
+    // make attributes suit and rank. Make them int and private
 
+    
     public Card(){
         //empty constructor
     }

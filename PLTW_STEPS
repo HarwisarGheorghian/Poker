@@ -1,0 +1,84 @@
+Unit 5: Writing Classes
+
+Overview: This activity will teach you the basics of classes, which include attributes, constructors, getters, and setters. 
+
+Introduction: First, we need to make sure that the cards are working properly. Without them, the player wouldn’t be able to play. 
+
+Attributes
+These are properties for the class. This gives the class its characteristics. These attributes can be represented as different types, such as strings, integers, booleans, or floats. They can also be made private or public. Making them private allows for data encapsulation, which allows data in each class to be secure. Usually, these attributes have methods called getters and setters which allows other classes to access that information. 
+
+
+
+Ex . private int happiness = 1; //Sets the attribute happiness to an integer value with a private keyword
+
+In a file called Card.java, there are attributes called suit and rank. Your job is to make them attributes.
+
+Activity 5.1:
+Go to class Card.java
+Follow the instructions on line 4
+
+
+Getters/Setters
+These are ways to access attributes in a class. As I said before, data encapsulation allows for data in a class to be more secure. If we were to make these attributes public, then it would be really easy for a hacker to get into them. This is why you make it private. Going back to getters and setters, they do 2 things. First, they allow you to get the data of the attribute. Second, they allow you to change the value of the attribute. Getters get the attribute, and setters change the value of the attribute. 
+Ex. public int getHappiness(){
+	Return happiness; //returns the happiness when called in another class
+}
+
+Public void setHappiness(int happy){ //requires a parameter in order for the value to be changed
+	Happiness = happy; //does not return a type due to no value being returned
+}
+
+Activity 5.2:
+Go back to Card.java. Look at lines 11-25. Understand how those methods work and what they do for attributes rank and suit. Then write it down in the description below
+
+	What do getters and setters do for rank and suit?
+
+Go to Player.java. The player still needs attributes of money, totalRankValue, and a name. Of course, how would be able to be identified? Create the attributes by following the directions, and then make the getters and setters by following the directions on lines 20-25 and line 36. 
+
+Constructors 
+Constructors are definitions of the class. In other words, when a new class is made in another file, such as Main, they gain values for attributes or other things when its constructor is called. When a constructor is called, it can use all the attributes defined in the class, which gives it lots of versatility. 
+
+Ex. public HappyHappy(){
+	Happiness = 100; //sets the attribute happiness to 100. Every time this constructor is called, the attribute happiness will be set to 100.
+}
+
+Activity 5.3
+Although you made attributes for the Player class, you need to create the Player constructor so it can be called on in Main. That’s how we actually need to play Poker!
+Create the Player Constructor on line 12
+Then go to Stage.java, which is a separate class. In this class, we make enums for the Player. Enums are used as constants and have many uses in programming. Unfortunately, it is outside the scope of the lesson, so it will have to be covered another time. Make the Stage constructor by following the instructions on lines 10-11.
+Next go to Token.java. If you read the instructions, you’ll notice that the parameter has the same name as the class attribute. In order to distinguish between them, the class attribute can be referred to though this.
+Ex. this.happiness //refers to happiness class attribute
+Now follow the instructions on Token.java and create the constructor!
+
+Methods
+Besides setters and getters, these are functions inside a class that can do pretty much anything. These functions have no limitation to what you can do as long as you code them properly. These methods either return a value, usually a data type or an object, or void, which means they return no data type.
+
+Ex. public String showHappiness(){} // must return a string value
+
+      Public void eatHappiness(){} //does not return a value
+
+There is one more important keyword that I won’t be showing you in this lesson: static. This means that the method doesn’t need to have an object created in order to call it. Usually, an object of the class will need to be created before that method can be used. But with static, you can call that method anytime
+
+Ex. Public string showHappiness(){} // returns a string value and requires an object to be created
+
+Public static string showHappiness(){} // returns a string value but has the static keyword. This means that it can be called without having an object to be created. 
+
+Activity 5.4
+In the Deck Class, I created an Arraylist of type Card, which is a class. That ArrayList stores objects, in which those objects store all the attributes and methods from that class. In the constructor of Deck, we need to store the suit and the rank for each Card using a for loop.
+Call each of those methods by following the instructions on lines 9-10. 
+
+
+Putting it All Together
+In this lesson, you learned about classes and what types of things go into each class, such as attributes, getters and setters, constructors, and methods. And now it's time to put it all together!
+
+
+Activity 5.5
+Go into the Main.class. You’ll notice their are a lot of lines missing. Complete them all to finally be able to play oker with your friends! Here are the line numbers
+Line 10: Create the scanner object
+Line 14/15: Create Objects
+Line 22: Use setName method
+Line 37, 58, 63: Call the getter from the Stage class to finish the conditional
+Line 78: Draw 2 cards using the draw method from the Player class.
+Line 86: Create a new player
+Lien 102: Call the tokenStats method
+If you have any trouble with the project, check the folder src2 in the repository to see what code is wrong. 

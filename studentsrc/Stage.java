@@ -1,13 +1,14 @@
 package studentsrc;
 import studentsrc.*;
 public enum Stage{
-    //Make Bet, Fold, and Check enums with descriptions "Bet", "Fold", "Check"
+    BET("Bet"),
+    CHECK("Check"),
+    FOLD("Fold");
 
     private String desc;
 
-    Stage(String description){
-        this.desc = description;
-    }
+    //Create a constructor called string with parameter (string : description), and set that parameter equal to the
+    //attribute desc.
 
     public String getDescription(){
         //return the description
