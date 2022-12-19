@@ -5,8 +5,8 @@ import studentsrc.*;
 
 public class Player{
     //Make the attribute money(int), totalRankValue(int), and name(string)
-    private Card[] hand = new Card[2];
-    private String[] displayingHand = new String[2];
+    private Card[] hand = new Card[2]; //Creates a hand of size two
+    private String[] displayingHand = new String[2]; //Creates a string based hand
     private EnumMap<Token, Integer> tokenCounter = new EnumMap<Token, Integer>(Token.class);
 
     public Player(){
@@ -17,47 +17,47 @@ public class Player{
         tokenCounter.put(Token.FIFTY, 1);
     }
 
-    public int getMoney(){
+    public int getMoney(){ //Getter
         //return money
     }
     
-    public void setMoney(int money){
+    public void setMoney(int money){ //Setter
         //set ,pmey
     }
 
-    public EnumMap<Token, Integer> getTokenCounter(){
+    public EnumMap<Token, Integer> getTokenCounter(){ //Getter
         return tokenCounter;
     }
 
-    public void setTokenCounter(Token t1, int x){
+    public void setTokenCounter(Token t1, int x){ //Setter
         tokenCounter.put(t1, x);
     }
 
-    public String getName(){
+    public String getName(){ //Getter
         return this.name;
     }
 
-    public void setName(String name){
+    public void setName(String name){ //Setter
         this.name = name;
     }
 
-    public int getTotalRankValue(){
+    public int getTotalRankValue(){ //Getter
         return totalRankValue;
     }
-
-    public String[] getDisplayHand(){
+ 
+    public String[] getDisplayHand(){ //Getter
         displayingHand[0] = hand[0].displayCard();
         displayingHand[1] = hand[1].displayCard();
         return displayingHand;
     }
 
-    public Card[] draw(Deck deck){
+    public Card[] draw(Deck deck){ //Draws 2 cards from top deck
        hand = deck.drawCards();
        totalRankValue = hand[0].getRank() + hand[1].getRank();
        return hand;
     }
 
-    public EnumMap<Token, Integer> convertTokens(int bet){
+    public EnumMap<Token, Integer> convertTokens(int bet){ //Coverts money into tokens
         EnumMap<Token, Integer> convertedTokens = new EnumMap<Token, Integer>(Token.class); 
         int remainder = 0;
         remainder = bet / 50;
@@ -77,11 +77,11 @@ public class Player{
         return convertedTokens;
     }
 
-    public int TokensToMoney(){
+    public int TokensToMoney(){ //converts tokens back into money
         return 50 * tokenCounter.get(Token.FIFTY) + 10 * tokenCounter.get(Token.TEN) + 5 * tokenCounter.get(Token.FIVE) + tokenCounter.get(Token.ONE);
     }
 
-    public String tokenStats(){
+    public String tokenStats(){ //Generates token stats. Sort of like toString
         return "Player " + name + ":\n" + "50 Token: " + tokenCounter.get(Token.FIFTY) + "\n" + "10 Token: " + tokenCounter.get(Token.TEN)
         + "\n" + "5 Token: " + tokenCounter.get(Token.FIVE) + "\n" + "1 Token: " + tokenCounter.get(Token.ONE);
     }

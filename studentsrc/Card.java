@@ -8,23 +8,23 @@ public class Card{
         //empty constructor
     }
 
-    public int getRank(){
+    public int getRank(){ //Getter
         return this.rank;
     }
 
-    public int getSuit(){
+    public int getSuit(){ //Getter
         return this.suit;
     }
 
-    public void setRank(int ranks){
+    public void setRank(int ranks){ //setter
         this.rank = ranks;
     }
 
-    public void setSuit(int suits){
+    public void setSuit(int suits){ // Setter
         this.suit = suits;
     }
 
-    public String displayCard(){
+    public //Change this type to the right value displayCard(){
         String displaySuit = "";
         String displayRank = "";
         switch(this.suit){
@@ -45,7 +45,7 @@ public class Card{
                 break;
         }
 
-        switch(this.rank){
+        //create a switch statement similar to suit but for rank{
             case 11:
                 displayRank = "J";
                 break;
@@ -62,6 +62,6 @@ public class Card{
                 displayRank = Integer.toString(this.rank);
                 break;
         }
-        return new String(displaySuit + displayRank);
+        //Return a string combined of displaySuit and displayRank;
     }
 }
