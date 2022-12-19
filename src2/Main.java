@@ -5,18 +5,22 @@ import java.util.*;
 public class Main{
     static EnumMap<Token, Integer> TotalAmount = new EnumMap<Token, Integer>(Token.class);
     public static void main(String[] args){
+        
         Scanner sc = new Scanner(System.in);
         int playerCount;
         System.out.println("Welcome to broken poker! How many players are playing?");
         playerCount = sc.nextInt();
         ArrayList<Player> players = new ArrayList<Player>(playerCount);
         Deck deck = new Deck();
-        System.out.println("There are " + playerCount + " players playing. Please state your names.");
+        System.out.println("There are " + playerCount + " players playing. Please state their names.");
         //Initial step
-        for(int i = 0; i < playerCount; i++){
+        for(int i = 0; i < players.size(); i++){
             System.out.println("What is your name?");
             String name = sc.next();
             players.get(i).setName(name);
+
+            System.out.println(players.get(i).tokenStats());
+
             System.out.println("Ok " + players.get(i).getName() + ". Now choose to either bet, check, or fold!");
             String choice = sc.next();
             if(choice.equals(Stage.BET.getDescription())){
@@ -38,6 +42,8 @@ public class Main{
                 System.out.println("Player " + players.get(i).getName() + " has quit.");
                 players.remove(i);
             }
+
+
         }
 
         if(players.size() == 0){
@@ -53,6 +59,17 @@ public class Main{
         }
 
         //Compare
+        int maxVal = 0;
+        Player correctPlayer = new Player();
+        for(int i = 0; i < playerCount; i++){
+            if(players.get(i).getTotalRankValue() >= maxVal){
+                maxVal = players.get(i).getTotalRankValue();
+                correctPlayer = players.get(i);
+            }
+        }
+        System.out.println("The player who won was " + correctPlayer.getName() + "!");
+        System.out.println("Their stats:");
+        System.out.println(correctPlayer.tokenStats());
         
     }
 }

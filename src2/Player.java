@@ -5,14 +5,14 @@ import src2.*;
 
 public class Player{
     private int money;
+    private int totalRankValue;
     private String name;
     private Card[] hand = new Card[2];
     private String[] displayingHand = new String[2];
     private EnumMap<Token, Integer> tokenCounter = new EnumMap<Token, Integer>(Token.class);
 
-    public Player(String name){
+    public Player(){
         this.money = 100;
-        this.name = name;
         tokenCounter.put(Token.ONE, 10);
         tokenCounter.put(Token.FIVE, 2);
         tokenCounter.put(Token.TEN, 3);
@@ -31,6 +31,10 @@ public class Player{
         this.name = name;
     }
 
+    public int getTotalRankValue(){
+        return totalRankValue;
+    }
+
     public String[] getDisplayHand(){
         displayingHand[0] = hand[0].displayCard();
         displayingHand[1] = hand[1].displayCard();
@@ -39,6 +43,7 @@ public class Player{
 
     public Card[] draw(Deck deck){
        hand = deck.drawCards();
+       totalRankValue = hand[0].getRank() + hand[1].getRank();
        return hand;
     }
 
@@ -57,5 +62,10 @@ public class Player{
         remainder = bet / 1;
         convertedTokens.put(Token.ONE, remainder);
         return convertedTokens;
+    }
+
+    public String tokenStats(){
+        return name + "\n" + "50 Token: " + tokenCounter.get(Token.FIFTY) + "\n" + "10 Token: " + tokenCounter.get(Token.TEN)
+        + "\n" + "5 Token: " + tokenCounter.get(Token.FIVE) + "\n" + "1 Token: " + tokenCounter.get(Token.ONE);
     }
 }
