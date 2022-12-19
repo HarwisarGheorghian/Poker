@@ -24,6 +24,7 @@ public class Player{
     private String name;
     private ArrayList<String> hand = new ArrayList<String>();
     private EnumMap<Tokens,Integer> tokensCounter = new EnumMap<Tokens,Integer>(Tokens.class);
+    
     public Player(String names){
         this.money = 200;
         this.name = names;

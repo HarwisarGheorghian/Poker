@@ -25,7 +25,7 @@ public class Main{
         int bet = 0;
         for(int i = 0; i < playerCount; i++){ // Initial Stage
             System.out.println("Make your bets!");
-            System.out.print("Player " + i + ": ");
+            System.out.print(players.get(i).getName()+ ": ");
             bet = sc.nextInt();
             game.makeBet(i, bet, Stages.START);
         }
