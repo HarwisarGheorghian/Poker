@@ -6,7 +6,7 @@ public class Deck{
     public Deck(){
         for(int i = 0; i < 52; i++){
             deck.add(new Card());
-            deck.get(i).set
+            //First, get the object of the player at index i. Then set their rank to i % 13 + 1
             //First, get the object of the player at index i. Then set their suti to i % 4 + 1
         }
         shuffle();

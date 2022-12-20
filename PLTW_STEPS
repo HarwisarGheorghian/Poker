@@ -43,10 +43,10 @@ Ex. public HappyHappy(){
 }
 
 Activity 5.3
-Although you made attributes for the Player class, you need to create the Player constructor so it can be called on in Main. That’s how we actually need to play Poker!
+Although you made attributes for the Player class, you need to create the Player constructor so it can be called on in Main. That’s what we actually need to play Poker!
 Create the Player Constructor on line 12
 Then go to Stage.java, which is a separate class. In this class, we make enums for the Player. Enums are used as constants and have many uses in programming. Unfortunately, it is outside the scope of the lesson, so it will have to be covered another time. Make the Stage constructor by following the instructions on lines 10-11.
-Next go to Token.java. If you read the instructions, you’ll notice that the parameter has the same name as the class attribute. In order to distinguish between them, the class attribute can be referred to though this.
+Next go to Token.java. If you read the instructions, you’ll notice that the parameter has the same name as the class attribute. In order to distinguish between them, the class attribute can be referred to through this.
 Ex. this.happiness //refers to happiness class attribute
 Now follow the instructions on Token.java and create the constructor!
 

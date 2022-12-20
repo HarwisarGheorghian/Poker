@@ -5,7 +5,6 @@ import java.util.*;
 public class Main{
     public static void main(String[] args){
         EnumMap<Token, Integer> TotalAmount = new EnumMap<>(Map.of(Token.FIFTY, 0, Token.TEN, 0, Token.FIVE, 0, Token.ONE, 0));
-        EnumMap<Token, Integer> TotalAmount = new EnumMap<>(Map.of(Token.FIFTY, 0, Token.TEN, 0, Token.FIVE, 0, Token.ONE, 0));
         
         //Create an Scanner Object with input of System.in
         int playerCount;
@@ -77,8 +76,9 @@ public class Main{
         for(int i = 0; i < players.size(); i++){
             //Use the player object to draw 2 cards from the desk using the draw method from the player class. Include
             //the deck object as well
-            System.out.println("Here is you set of cards");
-            System.out.println("Card 1: " + players.get(i).getDisplayHand()[0] + "\n" + "Card 2: " + players.get(i).getDisplayHand()[1]);
+            System.out.println("Here is you set of cards\n");
+            System.out.println(player.get(i).getName());
+            System.out.println("Card 1: " + players.get(i).getDisplayHand()[0] + "\n" + "Card 2: " + players.get(i).getDisplayHand()[1] + "\n");
         }
 
         //Compare
@@ -102,8 +102,6 @@ public class Main{
         System.out.println(//Call the method tokenStats);
         
         System.out.println("They won " + correctPlayer.TokensToMoney());
-
-        System.out.println(correctPlayer.getTokenCounter().get(Token.FIFTY) + TotalAmount.get(Token.FIFTY));
         
     }
 }
